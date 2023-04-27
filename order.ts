@@ -30,12 +30,12 @@ export class Order {
         return this.items
     }
 }
-let order = new Order();
-let menu1=new Menu('GS1','bo',40000)
-let menu2=new Menu('GS2','lon',30000)
-let menu3=new Menu('GS3','trau',50000)
-order.addMenuItem(menu1)
-order.addMenuItem(menu2)
-order.addMenuItem(menu3)
-order.removeMenuItem(menu2)
-console.log(order.getItems())
+// let order = new Order();
+// let menu1=new Menu('GS1:duoibo', 1, 40000)
+// let menu2=new Menu('GS2', 1, 30000)
+// let menu3=new Menu('GS3', 1, 50000)
+// order.addMenuItem(menu1)
+// order.addMenuItem(menu2)
+// order.addMenuItem(menu3)
+// order.removeMenuItem(menu2)
+// console.log(order.getItems())

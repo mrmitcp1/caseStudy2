@@ -1,12 +1,12 @@
 export class Menu {
     private _menuItemId: string;
-    private _title: string;
+    private _quantity: number;
 
     private _price : number;
 
-    constructor(menuItemId: string, title: string, price: number) {
+    constructor(menuItemId: string, quantity: number, price: number) {
         this._menuItemId = menuItemId;
-        this._title = title;
+        this._quantity = quantity;
         this._price = price;
     }
 
@@ -18,12 +18,12 @@ export class Menu {
         this._menuItemId = value;
     }
 
-    get title(): string {
-        return this._title;
+    get quantity(): number {
+        return this._quantity;
     }
 
-    set title(value: string) {
-        this._title = value;
+    set quantity(value: number) {
+        this._quantity = value;
     }
 
 
@@ -38,4 +38,5 @@ export class Menu {
         this._price=newPrice
     }
 }
-let menu = new Menu('GS1','duoi bo',40000)
+let menu = new Menu('GS1', 1, 40000)
+console.log(menu.menuItemId)

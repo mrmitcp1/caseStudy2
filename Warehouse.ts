@@ -2,6 +2,7 @@ import {Product} from "./Product";
 
 export class Warehouse {
     private products:Map<string,Product>=new Map()
+
     constructor() {
     }
     addProduct(product:Product){
@@ -11,15 +12,24 @@ export class Warehouse {
            this.products.set(product.name, new Product(product.name,product.quantity,product.price,product.day))
        }
     }
+
     getProducts(){
         return this.products.values()
     }
+
     findName(name:string){
         for (let product of this.products.values()){
             if (product.name===name){
                 return product;
             }
         }return (`no ${name} in ware house`)
+    }
+    getTotalImportPrice(){
+        let total = 0;
+        for (let product of this.products.values()){
+            total+=product.quantity*product.price
+        }
+        return total
     }
 }
 let product = new Product('beer',100,10000,  new Date('2023-02-23'))
@@ -33,4 +43,4 @@ wareHouse.addProduct(product1)
 wareHouse.addProduct(product3)
 wareHouse.addProduct(product4)
 wareHouse.addProduct(product5)
-console.log(wareHouse.findName('u'))
+console.log(wareHouse.getTotalImportPrice())
