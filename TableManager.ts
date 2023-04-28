@@ -7,7 +7,7 @@ export class TableManager {
     }
     addTable (totalCustomers:number) {
         index++
-        let table=new Table(index,totalCustomers)
+        let table=new Table(index,totalCustomers,0)
         this.listTable.push(table)
         if (table.totalCustomer > 0) {
             table.status = true
@@ -22,9 +22,12 @@ export class TableManager {
     CreatTable(numberOfTable:number){
         for (let i = 1; i < numberOfTable ; i++) {
             index ++
-            let table=new Table(i,6)
-            this.listTable.push(table)
-        }return this.listTable
+            // let table=new Table(i,0,0)
+            this.listTable.push(new Table(i,0,0))
+            // console.log(this.listTable)
+        }
+        console.log(this.listTable);
+        return this.listTable
     }
     getTable(id:number){
         return this.listTable
@@ -58,13 +61,14 @@ export class TableManager {
         }
     }
 
+
 }
 let tableManager = new TableManager()
 // tableManager.addTable(1,2)
 // tableManager.addTable(2,2)
 // tableManager.addTable(3,4)
 // tableManager.removeTable(1)
-console.log(tableManager.removeTable(1))
+// console.log(tableManager.removeTable(1))
 // // tableManager.removeCustomers(table2)
 // tableManager.addCustomer(table)
 // tableManager.addCustomer(table)

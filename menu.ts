@@ -1,7 +1,7 @@
-export class Menu {
+export class MangerMenu {
     private _menuItemId: string;
     private _quantity: number;
-
+    items:MangerMenu[]=[];
     private _price : number;
 
     constructor(menuItemId: string, quantity: number, price: number) {
@@ -37,6 +37,13 @@ export class Menu {
     upDatePrice(newPrice){
         this._price=newPrice
     }
+    addMenuItem(menuItem:MangerMenu){
+        this.items.push(menuItem)
+    }
+    removeMenuItem(menuIem:MangerMenu){
+        let index = this.items.indexOf(menuIem)
+        if (index!==-1){
+            this.items.splice(index,1)
+        }
+    }
 }
-let menu = new Menu('GS1', 1, 40000)
-console.log(menu.menuItemId)
