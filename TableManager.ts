@@ -8,7 +8,7 @@ export class TableManager {
     addTable (totalCustomers:number) {
         index++
         if (totalCustomers > 6){
-            console.log(`ban toi da 6 nguoi`)
+            console.log(`max 6 people`)
         }else{
             let table= new Table(index,totalCustomers,0)
             this.listTable.push(table)
@@ -25,7 +25,6 @@ export class TableManager {
             index ++
             this.listTable.push(new Table(i,0,0))
         }
-        // console.log(this.listTable);
         return this.listTable
     }
     getTable(id:number){
@@ -33,7 +32,7 @@ export class TableManager {
     }
     getTableById(id:number){
         let table = this.listTable.find((item)=>item.id===id)
-        return table ? table : 'khong co ban nay'
+        return table ? table : 'table is not available'
     }
 
     addCustomer(tableId:number ) {
@@ -49,7 +48,7 @@ export class TableManager {
             }
             else {
                 table.status = false
-                console.log('Ban day, moi anh/chi qua ban khac')
+                console.log('The table is full, please move to another table')
             }
         }
     }

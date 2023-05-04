@@ -1,5 +1,9 @@
 import {Product} from "./Product";
+const formatter = new Intl.NumberFormat('vi-VN',{
+    style:'currency',
+    currency : 'VND',
 
+})
 export class Warehouse {
     private products: Map<string, Product> = new Map()
 
@@ -49,6 +53,6 @@ export class Warehouse {
         for (let product of this.products.values()){
             total+=product.quantity*product.price
         }
-        return total
+        return formatter.format(total)
     }
 }
