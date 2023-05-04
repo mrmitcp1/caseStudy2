@@ -7,11 +7,12 @@ export class TableManager {
     }
     addTable (totalCustomers:number) {
         index++
-        let table=new Table(index,totalCustomers,0)
-        this.listTable.push(table)
-        if (table.totalCustomer > 0) {
-            table.status = true
-
+        if (totalCustomers > 6){
+            console.log(`ban toi da 6 nguoi`)
+        }else{
+            let table= new Table(index,totalCustomers,0)
+            this.listTable.push(table)
+            table.status=true
         }
     }
     removeTable(id:number){
@@ -22,11 +23,9 @@ export class TableManager {
     CreatTable(numberOfTable:number){
         for (let i = 1; i < numberOfTable ; i++) {
             index ++
-            // let table=new Table(i,0,0)
             this.listTable.push(new Table(i,0,0))
-            // console.log(this.listTable)
         }
-        console.log(this.listTable);
+        // console.log(this.listTable);
         return this.listTable
     }
     getTable(id:number){
@@ -38,40 +37,34 @@ export class TableManager {
     }
 
     addCustomer(tableId:number ) {
-      let checkCus = true
-        if(this.listTable[tableId-1].totalCustomer === this.listTable[tableId -1].capacity){
-            checkCus = false
-        }
-        if(checkCus){
-            this.listTable[tableId-1].totalCustomer ++
-            this.listTable[tableId-1].status = true
-        }
-        else {
-            this.listTable[tableId-1].status = false
-            console.log('Ban day, moi anh/chi qua ban khac')
-        }
-    }
-
-    removeCustomers(tableId:number) {
-        if (this.listTable[tableId-1].totalCustomer > 0) {
-            this.listTable[tableId-1].totalCustomer--;
-            if (this.listTable[tableId-1].totalCustomer=== 0) {
-                this.listTable[tableId-1].status = false
+        let checkCus = true
+        let table = this.getTableById(tableId)
+        if(table instanceof Table){
+            if(table.totalCustomer === table.capacity){
+                checkCus = false
+            }
+            if(checkCus){
+                table.totalCustomer ++
+                table.status = true
+            }
+            else {
+                table.status = false
+                console.log('Ban day, moi anh/chi qua ban khac')
             }
         }
     }
 
+    removeCustomers(tableId:number) {
+        let table = this.getTableById(tableId)
+        if(table instanceof Table){
+        if (table.totalCustomer > 0) {
+            table.totalCustomer--;
+            if (table.totalCustomer=== 0) {
+                table.status = false
+            }
+        }
+    }
+    }
+
 
 }
-let tableManager = new TableManager()
-// tableManager.addTable(1,2)
-// tableManager.addTable(2,2)
-// tableManager.addTable(3,4)
-// tableManager.removeTable(1)
-// console.log(tableManager.removeTable(1))
-// // tableManager.removeCustomers(table2)
-// tableManager.addCustomer(table)
-// tableManager.addCustomer(table)
-// console.log(tableManager.getTableById(1))
-// console.log(tableManager.getTableById(3))
-//

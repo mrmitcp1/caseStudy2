@@ -18,6 +18,5 @@ export class Table {
         this.status = false
         this.id = id;
         this.totalCustomer = totalCustomer
-        // this.eating=eating
     }
 }
