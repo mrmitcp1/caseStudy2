@@ -65,6 +65,13 @@ export class TableManager {
         }
     }
     }
-
+resetTable(tableId:number){
+        let table = this.getTableById(tableId)
+    if (table instanceof Table){
+        table.status=false
+        table.eating=0;
+        table.totalCustomer=0
+    }
+}
 
 }

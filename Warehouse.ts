@@ -1,28 +1,48 @@
 import {Product} from "./Product";
 
 export class Warehouse {
-    private products:Map<string,Product>=new Map()
+    private products: Map<string, Product> = new Map()
 
     constructor() {
     }
-    addProduct(product:Product){
-       if (this.products.has(product.name)){
-           this.products.get(product.name).quantity+=product.quantity
-       }else {
-           this.products.set(product.name, new Product(product.name,product.quantity,product.price,product.day))
-       }
+
+    addProduct(name: string, quantity: number, price: number, day: Date) {
+        if (this.products.has(name)) {
+            this.products.get(name).quantity += quantity
+        } else {
+            this.products.set(name, new Product(name, quantity, price, day))
+        }
     }
 
-    getProducts(){
+    getProducts() {
         return this.products.values()
     }
 
-    findName(name:string){
-        for (let product of this.products.values()){
-            if (product.name===name){
+    findName(name: string) {
+        for (let product of this.products.values()) {
+            if (product.name === name) {
                 return product;
             }
-        }return (`no ${name} in ware house`)
+        }
+        return (`no ${name} in ware house`)
+    }
+
+    deleteProducts(name: string) {
+        let product = this.products.get(name)
+        if (!product) {
+            console.log(`no ${name} in ware house`)
+        } else return this.products.delete(name)
+    }
+
+    updateProducts(name: string, quantity: number, price: number, day: Date) {
+        let exitingProduct = this.findName(name);
+        if (exitingProduct instanceof Product) {
+            exitingProduct.price = price;
+            exitingProduct.day = day;
+            exitingProduct.quantity = quantity
+        } else {
+            console.log(`no ${name} in ware house`)
+        }
     }
     getTotalImportPrice(){
         let total = 0;
@@ -32,15 +52,3 @@ export class Warehouse {
         return total
     }
 }
-let product = new Product('beer',100,10000,  new Date('2023-02-23'))
-let product1 = new Product('beer',100,10000, new Date('2023-01-12'))
-let product3 = new Product('beer',100,10000, new Date('2023-02-12'))
-let product4 = new Product('ken',10,10000, new Date('2023-03-03'))
-let product5 = new Product('ken',10,10000,new Date('2023-03-11'))
-let wareHouse = new Warehouse()
-wareHouse.addProduct(product)
-wareHouse.addProduct(product1)
-wareHouse.addProduct(product3)
-wareHouse.addProduct(product4)
-wareHouse.addProduct(product5)
-console.log(wareHouse.getTotalImportPrice())

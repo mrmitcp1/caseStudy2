@@ -1,10 +1,13 @@
 import {TableManager} from "./TableManager";
 import {Warehouse} from "./Warehouse";
 import {Table} from "./table";
+import {Product} from "./Product";
 
 let Table1 = new TableManager()
+let wareHouse = new Warehouse()
 let bill = 0;
 let listOder = []
+let listMenu=[]
 let managerTable = new TableManager()
 
 function AddOder() {
@@ -20,22 +23,22 @@ function AddOder() {
     let oder = +readlineSync.question("nhap:");
     switch (oder) {
         case 1:
-            addBill(15000, idTable1)
+            addBill(15000,'bia', idTable1)
             break
         case 2:
-            addBill(30000, idTable1)
+            addBill(30000,'ruou', idTable1)
             break
         case 3:
-            addBill(50000, idTable1)
+            addBill(50000,'thitbo', idTable1)
             break
         case 4:
-            addBill(40000, idTable1)
+            addBill(40000,'thitlon', idTable1)
             break
         case 5:
-            addBill(30000, idTable1)
+            addBill(30000,'rau', idTable1)
             break
         case 6:
-            addBill(20000, idTable1)
+            addBill(20000,'dau', idTable1)
             break
 
     }
@@ -77,7 +80,7 @@ function RemoveOder() {
     }
 }
 
-function addBill(cost: number, idTable: number) {
+function addBill(cost: number, menu:string, idTable: number) {
     let table = Table1.getTableById(idTable)
     if (table instanceof Table) {
         if (table.totalCustomer > 0) {
@@ -118,8 +121,6 @@ console.table(Table1.CreatTable(5))
 let totalMoney = 0
 let readlineSync = require("readline-sync");
 let status: boolean = true
-
-console.log("listtable----", Table1.listTable)
 while (status) {
     console.log(`
             ===========hello===========
@@ -152,7 +153,6 @@ while (status) {
                 }
                 case 3: {
                     let checkTable = +readlineSync.question("nhap ID ban muon kiem tra:");
-                    // Table1.getTableById(checkTable)
                     console.table(Table1.getTableById(checkTable))
                     break
                 }
@@ -185,6 +185,7 @@ while (status) {
             console.log(`oder
                 1.them mon
                 2.xoa mon
+                3.thanh toan
         `)
             let managerOder = +readlineSync.question("nhap:");
             switch (managerOder) {
@@ -196,8 +197,69 @@ while (status) {
                     RemoveOder()
                     break
                 }
+                case 3 :{
+                    let tableId = +readlineSync.question("nhap ID ban:")
+                    console.table(Table1.getTableById(tableId))
+                    Table1.resetTable(tableId)
+                    console.table(Table1.listTable)
+                    break
+                }
             }
+        break
         }
 
+        case 4:
+            console.log(` lam viec voi kho:
+                1. them hang
+                2. sua hang
+                3. xoa hang
+                4. xem danh sach hang
+                5. tim hang theo ten
+                6. tinh tien nhap hang
+                
+        `)
+            let managerWarehouse = +readlineSync.question("nhap: ");
+            switch (managerWarehouse) {
+                case 1: {
+                    let name = readlineSync.question("name of product: ")
+                    let quantity = +readlineSync.question("quantity od product: ")
+                    let price = +readlineSync.question("price of product: ")
+                    let day = readlineSync.question("day of product: ")
+
+                    wareHouse.addProduct(name, quantity, price, day)
+                    console.log(wareHouse)
+                    break
+                }
+                case 2: {
+                    let name = readlineSync.question("name of product: ")
+                    let quantity = +readlineSync.question("quantity od product: ")
+                    let price = +readlineSync.question("price of product: ")
+                    let day = readlineSync.question("day of product: ")
+                    wareHouse.updateProducts(name,quantity,price,day)
+                    console.log(wareHouse)
+                    break
+                }
+                case 3:{
+                    let name = readlineSync.question("name of product: ")
+                    wareHouse.deleteProducts(name)
+                    console.log(wareHouse)
+                    break
+                }
+                case 4:{
+                    console.log(wareHouse.getProducts())
+                    break
+                }
+                case 5:{
+                    let name = readlineSync.question("name of product: ")
+                    console.log(wareHouse.findName(name))
+                    break
+                }
+                case 6:{
+                    console.log(wareHouse.getTotalImportPrice())
+                }
+
+
+            }
     }
+
 }

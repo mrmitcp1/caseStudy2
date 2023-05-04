@@ -14,6 +14,7 @@ export class Table {
     totalCustomer: number
     capacity: number = 6
     eating : menu = menu.none
+
     constructor(id, totalCustomer , eating:menu) {
         this.status = false
         this.id = id;
